@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Definitivo de AdBlockers - Zona Cero</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        /* Clases trampa con nombres típicos de publicidad que los adblockers eliminan a la vista */
+        .adsbygoogle, .ad-banner, .sponsored-content, .banner-publicidad {
+            background: #333;
+            border: 2px dashed #ff4444;
+            color: #ff4444;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .ad-container-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🧪 Laboratorio de Pruebas de AdBlocker</h1>
+        <p>Si tu bloqueador es bueno, esta página debería verse llena de huecos vacíos, contenedores bloqueados o avisos de elementos ocultos.</p>
+
+        <!-- Cebo 1: Contenedor con clases que los adblockers barren automáticamente -->
+        <div class="adsbygoogle">
+            [ Espacio bloqueado por clases trampa tipo AdSense ]
+        </div>
+
+        <div class="ad-container-grid">
+            <!-- Cebo 2: Iframe apuntando a dominios o rutas de rastreo/anuncios comunes -->
+            <div class="ad-banner">
+                <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-FAKE" style="width:100%; height:60px; border:none;"></iframe>
+            </div>
+            
+            <!-- Cebo 3: Contenedor con nombres prohibidos -->
+            <div class="sponsored-content">
+                [ Anuncio patrocinado externo simulado ]
+            </div>
+        </div>
+
+        <!-- Cebo 4: Script externo de prueba (los adblockers bloquean peticiones a estos dominios de tracking) -->
+        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script>
+        
+        <div class="banner-publicidad">
+            <script>
+                // Intento de inyección de anuncio falso que simula red publicitaria
+                if (window.adsbygoogle) {
+                    document.write("❌ ¡Alerta! El script de anuncios cargó (AdBlock inactivo).");
+                } else {
+                    document.write("✅ ¡Bloqueado! El script de anuncios externo fue interceptado.");
+                }
+            </script>
+        </div>
+    </div>
+
+</body>
+</html>
